@@ -1,0 +1,219 @@
+<% include partials/header %>
+
+
+<div class="card text-center">
+<div class="card-header">
+  Hey!
+</div>
+<div class="card-body">
+  <h5 class="card-title">All Books</h5>
+  <p class="card-text">This page will show you every book currently stored on the website. To quickly cycle through all of our books, you might want to click the button below. If not, ENJOY! <3</p>
+  <a class="btn purple-gradient" href="/books/onepage">One-Page List</a>
+</div>
+<blockquote class="blockquote mb-0 card-body">
+      <p>“You can tell a lot about a fellow's character by his way of eating jellybeans. ”</p>
+      <footer class="blockquote-footer">
+        <small class="text-muted">
+          Quote from President <cite title="Source Title">Ronald Reagan</cite>
+        </small>
+      </footer>
+</blockquote>
+</div>
+
+
+
+<br>
+
+
+        <!-- Card deck -->
+<div class="card-deck">
+
+<% for(var i = 0; i < allbooks.length; i++){ %>
+<!-- Card -->
+
+<div class="col-lg-3 col-md-6 mb-r">
+    <div class="card mb-4">
+
+    <!--Card image-->
+    <div class="view overlay">
+        <img class="card-img-top" src="uploads/covers/<%= allbooks[i].imageName %>">
+        <a href="/books/read/<%= allbooks[i].id %>">
+        <div class="mask rgba-white-slight"></div>
+        </a>
+    </div>
+
+<!-- Button -->
+<a class="btn-floating btn-action ml-auto mr-4 mdb-color red accent-3" href="/books/read/<%= allbooks[i].id %>"><i class="fa fa-book"></i></a>
+<a class="btn-floating btn-action waves-effect waves-light" href=""><i class="fa fa-question"></i></a>
+    <!--Card content-->
+    <div class="card-body">
+      <!-- Label -->
+      <span class="badge badge-pill badge-dark"><%= allbooks[i].fiction %></span> <span class="badge badge-pill badge-dark"><%= allbooks[i].genre %></span>
+      <hr>
+        <!--Title-->
+        <h4 class="card-title" style="max-lines: 2"><%= allbooks[i].title %></h4>
+        <!-- <button type="button" class="btn btn-light-blue btn-md">Read more</button> -->
+        <p class="card-meta text-muted">Published <%= allbooks[i].date %></p>
+
+        <% if(allbooks[i].rating >= 0.1 && allbooks[i].rating <= 1.9){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+      <% }else if(allbooks[i].rating == 0){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+       <% }else if(allbooks[i].rating <= 2.9 && allbooks[i].rating >= 2){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+      <%  }else if(allbooks[i].rating <= 3.9 && allbooks[i].rating >= 3){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+     <%   }else if(allbooks[i].rating <= 4.9 && allbooks[i].rating >= 4){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+       <% }else if(allbooks[i].rating == 5){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+      </ul>
+       <% }else if(allbooks[i].rating == null){ %>
+       <ul class="rating">
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+   </ul> 
+   <% } %>
+          
+
+    </div>
+
+    </div>
+</div>
+    <!-- Card -->
+<% } %>
+
+
+</div>
+<!-- Card deck -->
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<% include partials/footer %>

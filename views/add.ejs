@@ -1,0 +1,363 @@
+<% include partials/header %>
+
+<!--Section: Inputs-->
+<section class="section card mb-5">
+
+<div class="card-body">
+
+  <!--Section heading-->
+  <h1 class="text-center my-5 h1">Book found from ISBN</h1>
+
+  <h5 class="pb-5">Basic Info</h5>
+
+  <form action="/books/add/complete" method="POST" id="bookForm" enctype="multipart/form-data">
+    <!--Grid row-->
+  <div class="row">
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+    <div class="md-form">
+      <input value="<%= isbn %>" type="text" class="form-control" name="isbn">
+      <label for="form3" class="active">ISBN</label>
+    </div>
+
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+    <div class="md-form">
+      <input value="<%= book.title %>" type="text" class="form-control" name="title">
+      <label for="form3" class="active">Title</label>
+    </div>
+
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-4 mb-4">
+
+    <div class="md-form">
+      <input value="<%= book.authors %>" type="text" class="form-control" name="author">
+      <label for="form3" class="active">Author(s)</label>
+    </div>
+
+  </div>
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+  <div class="md-form">
+    <input value="<%= book.description %>" type="text" class="form-control" name="description">
+    <label class="active" for="form4">Description</label>
+  </div>
+
+</div>
+<!--Grid column-->
+</div>
+<!--Grid row-->
+
+
+<!--Grid row-->
+
+
+<h5 class="pb-5">Extra Info</h5>
+
+<!--Grid row-->
+<div class="row">
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+    <h4>Rating(<% if(book.averageRating == null){ %>
+      No Rating
+    <% }else{ %>
+      <span name="rating"><%= book.averageRating %></span>
+    <% } %> ):</h4>
+    <% if(book.averageRating >= 0.1 && book.averageRating <= 1.9){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+      <% }else if(book.averageRating == 0){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+       <% }else if(book.averageRating <= 2.9 && book.averageRating >= 2){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+      <%  }else if(book.averageRating <= 3.9 && book.averageRating >= 3){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+     <%   }else if(book.averageRating <= 4.9 && book.averageRating >= 4){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star-o"></i>
+          </li>
+      </ul>
+       <% }else if(book.averageRating == 5){ %>
+          <ul class="rating">
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+          <li>
+            <i class="fa fa-star"></i>
+          </li>
+      </ul>
+       <% }else if(book.averageRating == null){ %>
+       <ul class="rating">
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+       <li>
+         <i class="fa fa-star-o"></i>
+       </li>
+   </ul> 
+   <% } %>
+  </div>
+  <!--Grid column-->
+
+  <div class="col-md-6 mb-4">
+    <h4>Pages:</h4>
+    <h3 name="pageCount" value="<%= book.pageCount %>" form="bookForm"><%= book.pageCount %></h3>
+  </div>
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+    <h4>Date Published:</h4>
+    <h3 name="date"><%= book.publishedDate %></h3>
+  </div>
+
+  <div class="col-md-6 mb-4">
+    <h4>Publisher:</h4>
+    <h3><%= book.publisher %></h3>
+  </div>
+  <!--Grid column-->
+  
+
+</div>
+<!--Grid row-->
+
+<h5 class="pb-5">Upload Files</h5>
+
+<!--Grid row-->
+<div class="row">
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+      <div class="md-form">
+        <div class="file-field">
+          <div class="btn btn-primary btn-sm float-left">
+            <span>Epub File</span>
+            <input type="file" name="bookFile">
+          </div>
+          <div class="file-path-wrapper">
+            <input name="fileName" class="file-path validate" type="text" placeholder="Upload your file">
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+      <div class="md-form">
+        <div class="file-field">
+          <div class="btn btn-primary btn-sm float-left">
+            <span>Book Cover Image File</span>
+            <input type="file" name="coverFile">
+          </div>
+          <div class="file-path-wrapper">
+            <input name="imageName" class="file-path validate" type="text" placeholder="Upload one or more files" name="coverFile">
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <!--Grid column-->
+
+</div>
+<!--Grid row-->
+<h5 class="pb-5">Categorization</h5>
+<div class="row">
+  <div class="col-lg-4 col-md-6 mb-4">
+
+  <fieldset class="form-check mb-4">
+    <input class="form-check-input" name="fiction" type="radio" checked="checked" value="Fiction" id="yeet">
+    <label class="form-check-label" for="yeet">Fiction</label>
+
+    <input class="form-check-input" name="fiction" type="radio" id="radio22" value="Non Fiction">
+    <label class="form-check-label" for="radio22">Non Fiction</label>
+  </fieldset>
+
+
+    </div>
+  <!--Grid column-->
+
+  <div class="col-lg-4 col-md-6 mb-4">
+
+  <fieldset class="form-check mb-4">
+    <input class="form-check-input" name="genre" type="radio" id="radio1" checked="checked" value="Art">
+    <label class="form-check-label" for="radio1">Art</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio2" value="Biography">
+    <label class="form-check-label" for="radio2">Biography</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio3" value="Business">
+    <label class="form-check-label" for="radio3">Business</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio3" value="Childrens">
+    <label class="form-check-label" for="radio3">Children's</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio4" value="Religion">
+    <label class="form-check-label" for="radio4">Religion</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio5" value="Classics">
+    <label class="form-check-label" for="radio5">Classics</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio6" value="Comics">
+    <label class="form-check-label" for="radio6">Comics</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio7" value="Crime">
+    <label class="form-check-label" for="radio7">Crime</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio8" value="Fantasy">
+    <label class="form-check-label" for="radio8">Fantasy</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio9" value="Historical Fiction">
+    <label class="form-check-label" for="radio9">Historical Fiction</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio10" value="History">
+    <label class="form-check-label" for="radio10">History</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio11" value="Horror">
+    <label class="form-check-label" for="radio11">Horror</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio12" value="Mystery">
+    <label class="form-check-label" for="radio12">Mystery</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio13" value="Philosophy">
+    <label class="form-check-label" for="radio13">Philosophy</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio14" value="Poetry">
+    <label class="form-check-label" for="radio14">Poetry</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio15" value="Science">
+    <label class="form-check-label" for="radio15">Science</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio16" value="Romance">
+    <label class="form-check-label" for="radio16">Romance</label>
+
+    <input class="form-check-input" name="genre" type="radio" id="radio17" value="Science Fiction">
+    <label class="form-check-label" for="radio17">Science Fiction</label>
+  </fieldset>
+
+
+</div>
+
+</div>
+<div class="row">
+  <button type="submit" class="btn btn-outline-primary btn-rounded waves-effect" form="bookForm">Complete</button>
+</div>
+  </form>
+
+</div>
+
+</section>
+<!--Section: Inputs-->
+
+
+
+
+
+
+<% include partials/footer %>
