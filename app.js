@@ -22,8 +22,8 @@ var date1 = new Date();
 
 //config
 AWS.config.update({
-    accessKeyId: process.env.S3_KEY,
-    secretAccessKey: process.env.S3_SECRET,
+    accessKeyId: process.env.accessKeyId,
+    secretAccessKey: process.env.secretAccessKey,
     region: "us-east-2"
 });
 
