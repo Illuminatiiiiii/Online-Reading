@@ -49,6 +49,19 @@ app.get("/books", function(req, res){
     });
 });
 
+app.get("/books/onepage", function(req, res){
+    Books.find({}, function(err, allbooks) {
+        if (err) {
+            console.log("Problem getting books");
+        }
+        else {
+            res.render("onepage", {
+                allbooks: allbooks
+            });
+        }
+    });
+});
+
 //Take ISBN and post it
 app.get("/books/add", function(req, res) {
     res.render("add");
@@ -142,11 +155,10 @@ app.get("/books/read/:id", function(req, res) {
     });
 });
 
+
 //Basic Routes
 app.get("/", function(req, res){
     res.render("index");
 });
-
-
  
 app.listen(process.env.PORT || 3000, () => console.log('Online Reading Website Started'));

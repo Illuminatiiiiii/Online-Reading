@@ -1,0 +1,265 @@
+<% include partials/header %>
+
+<blockquote class="blockquote mb-0 card-body">
+      <p>“If we ever forget that we're one nation under God, then we will be one nation gone under.”</p>
+      <footer class="blockquote-footer">
+        <small class="text-muted">
+          Quote from President <cite title="Source Title">Ronald Reagan</cite>
+        </small>
+      </footer>
+</blockquote>
+</div>
+
+<br>
+
+<!-- Table with panel -->
+<div class="card card-cascade narrower">
+
+  <!--Card image-->
+  <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+    <div>
+      <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+        <i class="fa fa-th-large mt-0"></i>
+      </button>
+      <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+        <i class="fa fa-columns mt-0"></i>
+      </button>
+    </div>
+
+    <a href="" class="white-text mx-3">Books</a>
+
+    <div>
+
+    </div>
+
+  </div>
+  <!--/Card image-->
+
+  <div class="px-4">
+
+    <div class="table-wrapper">
+      <!--Table-->
+      <table class="table table-hover mb-0">
+
+        <!--Table head-->
+        <thead>
+          <tr>
+            <th>
+              Read
+            </th>
+            <th class="th-lg">
+              <a>Cover
+                <i class="fa fa-picture-o ml-1"></i>
+              </a>
+            </th>
+            <th class="th-lg">
+              <a>Title
+                <i class="fa fa-bookmark ml-1"></i>
+              </a>
+            </th>
+            <th class="th-lg">
+              <a href="">Author
+                <i class="fa fa-users ml-1"></i>
+              </a>
+            </th>
+            <th class="th-lg">
+              <a href="">Rating
+                <i class="fa fa-star ml-1"></i>
+              </a>
+            </th>
+            <th class="th-lg">
+              <a href="">Genre
+                <i class="fa fa-navicon ml-1"></i>
+              </a>
+            </th>
+            <th class="th-lg">
+              <a href="">Pages
+                <i class="fa fa-sort-numeric-desc ml-1"></i>
+              </a>
+            </th>
+            <th class="th-lg">
+              <a href="">Publisher
+                <i class="fa fa-home ml-1"></i>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <!--Table head-->
+
+        <!--Table body-->
+        <tbody>
+        <% for(var i = 0;i < allbooks.length;i++){ %>
+          <tr>
+            <th scope="row">
+                <a class="btn-floating btn-sm blue-gradient" href="/books/read/<%= allbooks[i].id %>"><i class="fa fa-book"></i></a>
+            </th>
+            <td><img src="/uploads/covers/<%= allbooks[i].imageName %>" style="width: 50px;height: 62px;" /></td>
+            <td><%= allbooks[i].title %></td>
+            <td><%= allbooks[i].author %></td>
+            <td><% if(allbooks[i].rating >= 0.1 && allbooks[i].rating <= 1.9){ %>
+            <ul class="rating">
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+        </ul>
+        <% }else if(allbooks[i].rating == 0){ %>
+            <ul class="rating">
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+        </ul>
+         <% }else if(allbooks[i].rating <= 2.9 && allbooks[i].rating >= 2){ %>
+            <ul class="rating">
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+        </ul>
+        <%  }else if(allbooks[i].rating <= 3.9 && allbooks[i].rating >= 3){ %>
+            <ul class="rating">
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+        </ul>
+       <%   }else if(allbooks[i].rating <= 4.9 && allbooks[i].rating >= 4){ %>
+            <ul class="rating">
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star-o"></i>
+            </li>
+        </ul>
+         <% }else if(allbooks[i].rating == 5){ %>
+            <ul class="rating">
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+            <li>
+              <i class="fa fa-star"></i>
+            </li>
+        </ul>
+         <% }else if(allbooks[i].rating == null){ %>
+         <ul class="rating">
+         <li>
+           <i class="fa fa-star-o"></i>
+         </li>
+         <li>
+           <i class="fa fa-star-o"></i>
+         </li>
+         <li>
+           <i class="fa fa-star-o"></i>
+         </li>
+         <li>
+           <i class="fa fa-star-o"></i>
+         </li>
+         <li>
+           <i class="fa fa-star-o"></i>
+         </li>
+     </ul> 
+     <% } %></td>
+            <td><% if(allbooks[i].fiction == "Fiction"){ %>
+            <span class="badge badge-pill badge-dark"><%= allbooks[i].fiction %></span>
+            <% }else{ %>
+            <span class="badge badge-pill badge-light"><%= allbooks[i].fiction %></span>
+            <% } %>
+                 <span class="badge badge-pill badge-primary"><%= allbooks[i].genre %></span></td>
+            <td><%= allbooks[i].pageCount %></td>
+            <td><%= allbooks[i].publisher %></td>
+          </tr>
+        <% } %>
+        </tbody>
+        <!--Table body-->
+      </table>
+      <!--Table-->
+    </div>
+
+  </div>
+
+</div>
+<!-- Table with panel -->
+<br>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<% include partials/footer %>
