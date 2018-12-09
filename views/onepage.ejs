@@ -94,7 +94,7 @@
             <th scope="row">
                 <a class="btn-floating btn-sm blue-gradient" href="/books/read/<%= allbooks[i].id %>"><i class="fa fa-book"></i></a>
             </th>
-            <td><img src="/uploads/covers/<%= allbooks[i].imageName %>" style="width: 50px;height: 62px;" /></td>
+            <td><img src="https://s3.us-east-2.amazonaws.com/onlinereading-bucket/<%= allbooks[i].imageName %>" style="width: 50px;height: 62px;" /></td>
             <td><%= allbooks[i].title %></td>
             <td><%= allbooks[i].author %></td>
             <td><% if(allbooks[i].rating >= 0.1 && allbooks[i].rating <= 1.9){ %>
