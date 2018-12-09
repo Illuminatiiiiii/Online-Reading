@@ -20,16 +20,13 @@ app.set("view engine", "ejs");
 
 var date1 = new Date();
 
-//config
-AWS.config.update({
+var s3 = new AWS.S3({
+    endpoint: "https://sfo2.digitaloceanspaces.com",
     accessKeyId: process.env.accessKeyId,
     secretAccessKey: process.env.secretAccessKey,
-    region: "us-east-2"
 });
 
-var s3 = new AWS.S3();
-
-var myBucket = "onlinereading-bucket";
+var myBucket = "onlinereading";
 
 //Connect to database
 mongoose.connect("mongodb://kody:3.14159265359@ds117830.mlab.com:17830/onlinereading", {
@@ -146,7 +143,7 @@ app.post("/books/add/complete", function(req, res){
         if(err){
             console.log(err)
         }else{
-            console.log("Successfully uploaded image to AWS");
+            console.log("Successfully uploaded image to Spaces");
             console.log(data);
         }
     });
@@ -160,7 +157,7 @@ app.post("/books/add/complete", function(req, res){
         if(err){
             console.log(err)
         }else{
-            console.log("Successfully uploaded EPUB file to AWS")
+            console.log("Successfully uploaded EPUB file to Spaces")
             console.log(data);
         }
     });
@@ -212,12 +209,12 @@ app.get("/books/read/:id", function(req, res) {
             //     region: "us-east-2"
             // })
 
-            // var fileURL = s3.getSignedUrl("getObject", {
-            //     Bucket: "onlinereading-bucket",
-            //     Key: book.isbn + ".epub"
-            // });
+            var fileURL = s3.getSignedUrl("getObject", {
+                Bucket: "onlinereading",
+                Key: book.isbn + ".epub"
+            });
 
-            var url = "https://s3.us-east-2.amazonaws.com/onlinereading-bucket/" + book.fileName;
+            var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + book.fileName;
             res.render("reader", {
                 epub: url
             });
