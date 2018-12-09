@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title><%= book.title %></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,12 +14,12 @@
         <script src="/epubjs/reader/js/libs/jquery.min.js"></script>
 
         <script src="/epubjs/reader/js/libs/zip.min.js"></script>
-
+  
         <script>
             "use strict";
             document.onreadystatechange = function () {
               if (document.readyState == "complete") {
-                window.reader = ePubReader("/uploads/books/<%= book.fileName %>", {
+                window.reader = ePubReader("<%= epub %>", {
                    restore: true
                  });
               }

@@ -1,6 +1,5 @@
 <% include partials/header %>
 
-
 <div class="card text-center">
 <div class="card-header">
   Hey!
@@ -36,7 +35,7 @@
 
     <!--Card image-->
     <div class="view overlay">
-        <img class="card-img-top" src="uploads/covers/<%= allbooks[i].imageName %>">
+        <img class="card-img-top" src="https://s3.us-east-2.amazonaws.com/onlinereading-bucket/<%= allbooks[i].imageName %>" type="image/jpeg">
         <a href="/books/read/<%= allbooks[i].id %>">
         <div class="mask rgba-white-slight"></div>
         </a>
@@ -53,7 +52,7 @@
         <!--Title-->
         <h4 class="card-title" style="max-lines: 2"><%= allbooks[i].title %></h4>
         <!-- <button type="button" class="btn btn-light-blue btn-md">Read more</button> -->
-        <p class="card-meta text-muted">Published <%= allbooks[i].date %></p>
+        <p class="card-meta text-muted">By <%= allbooks[i].author %></p>
 
         <% if(allbooks[i].rating >= 0.1 && allbooks[i].rating <= 1.9){ %>
           <ul class="rating">

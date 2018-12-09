@@ -3,15 +3,33 @@ var mongoose = require("mongoose");
 var isbnSearch = require("node-isbn");
 const bodyParser = require('body-parser');
 var fileUpload = require('express-fileupload');
+var AWS = require('aws-sdk');
+var fs =  require('fs');
+const multer = require("multer");
+
 const app = express();
 
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(multer().array);
 
 app.use(fileUpload());
 
 app.set("view engine", "ejs");
+
+var date1 = new Date();
+
+//config
+AWS.config.update({
+    accessKeyId: "AKIAJCFG24PDUSK7WJHA",
+    secretAccessKey: "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",
+    region: "us-east-2"
+});
+
+var s3 = new AWS.S3();
+
+var myBucket = "onlinereading-bucket";
 
 //Connect to database
 mongoose.connect("mongodb://kody:3.14159265359@ds117830.mlab.com:17830/onlinereading", {
@@ -37,11 +55,21 @@ var bookSchema = new mongoose.Schema({
 var Books = mongoose.model("Books", bookSchema);
 
 app.get("/books", function(req, res){
+
     Books.find({}, function(err, allbooks) {
         if (err) {
             console.log("Problem getting books");
         }
         else {
+        // var coverURLS = [];
+        //     for(var i = 0; i < allbooks.length;i++){
+        //         var coverURL = s3.getSignedUrl("getObject", {
+        //             Bucket: "onlinereading-bucket",
+        //             Key: allbooks[i].isbn + ".jpg",
+        //         });
+        //         coverURLS.push(coverURL);
+        //     }
+            // console.log(coverURLS);
             res.render("books", {
                 allbooks: allbooks
             });
@@ -98,15 +126,46 @@ app.post("/books/add/complete", function(req, res){
     const imageName = bookX.isbn + ".jpg";
     const fileName = bookX.isbn + ".epub";
 
-    //Move Files into Storage
-    coverFile.mv('public/uploads/covers/' + imageName, function(err) {
-        if (err)
-            return res.status(500).send(err);
+    //Move Files into Local Storage
+    // coverFile.mv('public/uploads/covers/' + imageName, function(err) {
+    //     if (err)
+    //         return res.status(500).send(err);
+    // });
+    // epubFile.mv('public/uploads/books/' + fileName, function(err) {
+    //     if (err)
+    //         return res.status(500).send(err);
+    // });
+    
+
+    //Firebase upload
+    s3.putObject({
+        Bucket: myBucket,
+        Key: imageName,
+        Body: coverFile.data,
+        ACL: "public-read"
+    }, function(err, data){
+        if(err){
+            console.log(err)
+        }else{
+            console.log("Successfully uploaded image to AWS");
+            console.log(data);
+        }
     });
-    epubFile.mv('public/uploads/books/' + fileName, function(err) {
-        if (err)
-            return res.status(500).send(err);
+
+    s3.putObject({
+        Bucket: myBucket,
+        Key: fileName,
+        Body: epubFile.data,
+        ACL: "public-read"
+    }, function(err, data){
+        if(err){
+            console.log(err)
+        }else{
+            console.log("Successfully uploaded EPUB file to AWS")
+            console.log(data);
+        }
     });
+
     isbnSearch.resolve(bookX.isbn, function (err, book) {
         if (err) {
             console.log('Book not found', err);
@@ -147,9 +206,21 @@ app.get("/books/read/:id", function(req, res) {
             console.log("Unable to find book with given id: " + req.params.id);
         }
         else {
+
+            // AWS.config.update({
+            //     accessKeyId: "AKIAJCFG24PDUSK7WJHA",
+            //     secretAccessKey: "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",
+            //     region: "us-east-2"
+            // })
+
+            // var fileURL = s3.getSignedUrl("getObject", {
+            //     Bucket: "onlinereading-bucket",
+            //     Key: book.isbn + ".epub"
+            // });
+
+            var url = "https://s3.us-east-2.amazonaws.com/onlinereading-bucket/" + book.fileName;
             res.render("reader", {
-                book: book,
-                id: req.params.id
+                epub: url
             });
         }
     });
@@ -164,7 +235,6 @@ app.get("/", function(req, res){
         if(err){
             console.log("Problem getting the most recent books.");
         }else{
-            console.log(book);
             res.render("index", {
                 book: book
             });
