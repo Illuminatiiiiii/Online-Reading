@@ -158,7 +158,18 @@ app.get("/books/read/:id", function(req, res) {
 
 //Basic Routes
 app.get("/", function(req, res){
-    res.render("index");
+
+    //Find the latest added books
+    Books.find({}, function(err, book){
+        if(err){
+            console.log("Problem getting the most recent books.");
+        }else{
+            console.log(book);
+            res.render("index", {
+                book: book
+            });
+        }
+    }).sort({date:-1}).limit(3);    
 });
  
 app.listen(process.env.PORT || 3000, () => console.log('Online Reading Website Started'));
