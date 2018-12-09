@@ -22,8 +22,8 @@ var date1 = new Date();
 
 //config
 AWS.config.update({
-    accessKeyId: "AKIAJCFG24PDUSK7WJHA",
-    secretAccessKey: "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",
+    accessKeyId: process.env.S3_KEY,
+    secretAccessKey: process.env.S3_SECRET,
     region: "us-east-2"
 });
 
@@ -35,7 +35,6 @@ var myBucket = "onlinereading-bucket";
 mongoose.connect("mongodb://kody:3.14159265359@ds117830.mlab.com:17830/onlinereading", {
     useNewUrlParser: true
 });
-
 
 var bookSchema = new mongoose.Schema({
     isbn: String,
