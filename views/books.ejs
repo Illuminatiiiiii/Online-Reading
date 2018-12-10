@@ -43,11 +43,15 @@
 
 <!-- Button -->
 <a class="btn-floating btn-action ml-auto mr-4 mdb-color red accent-3" href="/books/read/<%= allbooks[i].id %>"><i class="fa fa-book"></i></a>
-<a class="btn-floating btn-action waves-effect waves-light" href=""><i class="fa fa-question"></i></a>
+<a class="btn-floating btn-action waves-effect waves-light" href="/books/view/<%= allbooks[i].id %>"><i class="fa fa-question"></i></a>
     <!--Card content-->
     <div class="card-body">
       <!-- Label -->
-      <span class="badge badge-pill badge-dark"><%= allbooks[i].fiction %></span> <span class="badge badge-pill badge-dark"><%= allbooks[i].genre %></span>
+      <% if(allbooks[i].fiction == "Fiction"){ %>
+            <span class="badge badge-pill badge-dark"><%= allbooks[i].fiction %></span>
+            <% }else{ %>
+            <span class="badge badge-pill badge-light"><%= allbooks[i].fiction %></span>
+            <% } %> <span class="badge badge-pill badge-dark"><%= allbooks[i].genre %></span>
       <hr>
         <!--Title-->
         <h4 class="card-title" style="max-lines: 2"><%= allbooks[i].title %></h4>
