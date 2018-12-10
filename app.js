@@ -222,6 +222,15 @@ app.get("/books/read/:id", function(req, res) {
     });
 });
 
+//Kody
+app.get("/books/kody", function(req, res){
+    res.render("kody");
+});
+
+app.get("/books/andy", function(req, res){
+    res.render("andy");
+})
+
 
 //Basic Routes
 app.get("/", function(req, res){
