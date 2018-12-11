@@ -44,6 +44,8 @@ var bookSchema = new mongoose.Schema({
     publisher: String,
     imageName: String,
     fileName: String,
+    imageLocation: String,
+    fileLocation: String,
     fiction: String,
     genre: Array
  });
@@ -179,6 +181,8 @@ app.post("/books/add/complete", function(req, res){
                 publisher: book.publisher,
                 imageName: imageName,
                 fileName: fileName,
+                imageLocation: "https://onlinereading.sfo2.digitaloceanspaces.com/" + imageName,
+                fileLocation: "https://onlinereading.sfo2.digitaloceanspaces.com/" + fileName,
                 fiction: bookX.fiction,
                 genre: bookX.genre
             }, function(err, book) {
@@ -227,6 +231,47 @@ app.get("/books/view/:id", function(req, res){
         }
     });
 });
+
+app.get("/books/view/:id", function(req, res) {
+    Books.findById(req.params.id, function(err, book) {
+        if (err) {
+            console.log("Unable to find book with given id: " + req.params.id);
+        }
+        else {
+
+            var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + book.fileName;
+            res.render("reader", {
+                epub: url,
+                book: book
+            });
+        }
+    });
+});
+
+//Kody
+app.get("/books/kody", function(req, res){
+    res.render("kody");
+});
+
+app.get("/books/andy", function(req, res){
+    res.render("andy");
+});
+
+//Search for books
+app.post("/search/title", function(req, res){
+    Books.find({"title": req.body.query}, function(err, results) {
+        if (err) {
+            console.log("Unable to find any titles that match this search: " + req.body.query);
+        }
+        else {
+
+            var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + results.fileName;
+            res.render("search", {
+                 results: results
+            })
+        }
+    });
+})
 
 //Basic Routes
 app.get("/", function(req, res){
