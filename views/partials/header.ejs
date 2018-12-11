@@ -99,9 +99,9 @@
       </div>
       <ul class="nav navbar-nav nav-flex-icons ml-auto">
         <li class="nav-item">
-          <form class="search-form" role="search" action="/search/title" method="POST">
-            <div class="form-group md-form mt-0 pt-1 waves-light">
-              <input type="text" class="form-control" placeholder="Find a Title" name="query">
+          <form class="form-inline" role="search" action="/search/title" method="POST">
+            <div class="md-form my-0">
+              <input type="text" class="form-control mr-sm-2" placeholder="Find a Book" name="query">
             </div>
           </form>
         </li>
@@ -110,6 +110,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/books"><i class="fa fa-book"></i> <span class="clearfix d-none d-sm-inline-block">All Books</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-target="#modalAbandonedCart"><i class="fa fa-search"></i> <span class="clearfix d-none d-sm-inline-block">Search Books</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#modalLoginAvatar"><i class="fa fa-book"></i> <span class="clearfix d-none d-sm-inline-block">Upload Book</span></a>
@@ -155,6 +158,33 @@
   </div>
 </div>
 <!--Modal: Login with Avatar Form-->
+
+<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Are you sure?</p>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <i class="fa fa-times fa-4x animated rotateIn"></i>
+
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer flex-center">
+        <a href="" class="btn  btn-outline-danger">Yes</a>
+        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
 
   <main>
     <div class="container-fluid text-center">

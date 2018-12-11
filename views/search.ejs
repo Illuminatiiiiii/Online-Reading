@@ -1,248 +1,99 @@
 <% include partials/header %>
+<style>
+        
+        .intro-2 {
+            background: url("https://mdbootstrap.com/img/Photos/Others/img%20(46).jpg")no-repeat center center;
+            background-size: cover;
+        }
+        .top-nav-collapse {
+            background-color: #ff8a65 !important; 
+        }
+        .navbar:not(.top-nav-collapse) {
+            background: transparent !important;
+        }
+        @media (max-width: 768px) {
+            .navbar:not(.top-nav-collapse) {
+                background: #ff8a65 !important;
+            } 
+        }
+        .md-form .prefix {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+        h6 {
+            line-height: 1.7;
+        }
+        @media (max-width: 740px) {
+            .full-height,
+            .full-height body,
+            .full-height header,
+            .full-height header .view {
+                height: 1100px; 
+            } 
+        }
+    </style>
 
-<blockquote class="blockquote mb-0 card-body">
-      <p>“If we ever forget that we're one nation under God, then we will be one nation gone under.”</p>
-      <footer class="blockquote-footer">
-        <small class="text-muted">
-          Quote from President <cite title="Source Title">Ronald Reagan</cite>
-        </small>
-      </footer>
-</blockquote>
-</div>
+  <!--Intro Section-->
+  <section class="view intro-2 hm-stylish-strong">
+  <div class="full-bg-img">
+      <div class="container flex-center">
+          <div class="d-flex align-items-center">
+              <div class="row flex-center pt-5 mt-3">
+                  <div class="col-md-6 text-center text-md-left mb-5">
+                      <div class="white-text">
+                          <h1 class="display-4 wow fadeInLeft" data-wow-delay="0.3s">Search</h1>
+                          <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                          <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae, quisquam iste.</h6>
+                          <br>
+                          <a class="btn peach-gradient wow fadeInLeft" data-wow-delay="0.3s">Learn more</a>
+                      </div>
+                  </div>
+                  
+                  <div class="col-md-6 col-xl-5 offset-xl-1">
+                      <!--Form-->
+                      <!-- Material form subscription -->
+<div class="card">
 
-<br>
+<h5 class="card-header info-color white-text text-center py-4">
+    <strong>Subscribe</strong>
+</h5>
 
-<!-- Table with panel -->
-<div class="card card-cascade narrower">
+<!--Card content-->
+<div class="card-body px-lg-5">
 
-  <!--Card image-->
-  <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;">
 
-    <div>
-      <a href="/books/onepage" type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-        <i class="fa fa-th-large mt-0"></i>
-      </a>
-      <a href="/books" type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-        <i class="fa fa-columns mt-0"></i>
-      </a>
-    </div>
+        <p>Join our mailing list. We write rarely, but only the best content.</p>
 
-    <a href="" class="white-text mx-3">Search Results:</a>
+        <p>
+            <a href="" target="_blank">See the last newsletter</a>
+        </p>
 
-    <div>
+        <!-- Name -->
+        <div class="md-form mt-3">
+            <input type="text" id="materialSubscriptionFormPasswords" class="form-control">
+            <label for="materialSubscriptionFormPasswords">Name</label>
+        </div>
 
-    </div>
+        <!-- E-mai -->
+        <div class="md-form">
+            <input type="email" id="materialSubscriptionFormEmail" class="form-control">
+            <label for="materialSubscriptionFormEmail">E-mail</label>
+        </div>
 
-  </div>
-  <!--/Card image-->
+        <!-- Sign in button -->
+        <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Sign in</button>
 
-  <div class="px-4">
-
-    <div class="table-wrapper">
-      <!--Table-->
-      <table class="table table-hover mb-0">
-
-        <!--Table head-->
-        <thead>
-          <tr>
-            <th>
-              Read
-            </th>
-            <th class="th-lg">
-              <a>Cover
-                <i class="fa fa-picture-o ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a>Title
-                <i class="fa fa-bookmark ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a href="">Author
-                <i class="fa fa-users ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a href="">Rating
-                <i class="fa fa-star ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a href="">Genre
-                <i class="fa fa-navicon ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a href="">Pages
-                <i class="fa fa-sort-numeric-desc ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a href="">Publisher
-                <i class="fa fa-home ml-1"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <!--Table head-->
-
-        <!--Table body-->
-        <tbody>
-        <% for(var i = 0;i < results.length;i++){ %>
-          <tr>
-            <th scope="row">
-                <a class="btn-floating btn-sm blue-gradient" href="/books/read/<%= results[i].id %>"><i class="fa fa-book"></i></a>
-            </th>
-            <td><img src="https://onlinereading.sfo2.digitaloceanspaces.com/<%= results[i].imageName %>" style="width: 50px;height: 62px;" /></td>
-            <td><%= results[i].title %></td>
-            <td><%= results[i].author %></td>
-            <td><% if(results[i].rating >= 0.1 && results[i].rating <= 1.9){ %>
-            <ul class="rating">
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-        </ul>
-        <% }else if(results[i].rating == 0){ %>
-            <ul class="rating">
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-        </ul>
-         <% }else if(results[i].rating <= 2.9 && results[i].rating >= 2){ %>
-            <ul class="rating">
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-        </ul>
-        <%  }else if(results[i].rating <= 3.9 && results[i].rating >= 3){ %>
-            <ul class="rating">
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-        </ul>
-       <%   }else if(results[i].rating <= 4.9 && results[i].rating >= 4){ %>
-            <ul class="rating">
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star-o"></i>
-            </li>
-        </ul>
-         <% }else if(results[i].rating == 5){ %>
-            <ul class="rating">
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i>
-            </li>
-        </ul>
-         <% }else if(results[i].rating == null){ %>
-         <ul class="rating">
-         <li>
-           <i class="fa fa-star-o"></i>
-         </li>
-         <li>
-           <i class="fa fa-star-o"></i>
-         </li>
-         <li>
-           <i class="fa fa-star-o"></i>
-         </li>
-         <li>
-           <i class="fa fa-star-o"></i>
-         </li>
-         <li>
-           <i class="fa fa-star-o"></i>
-         </li>
-     </ul> 
-     <% } %></td>
-            <td><% if(results[i].fiction == "Fiction"){ %>
-            <span class="badge badge-pill badge-dark"><%= results[i].fiction %></span>
-            <% }else{ %>
-            <span class="badge badge-pill badge-light"><%= results[i].fiction %></span>
-            <% } %>
-                 <span class="badge badge-pill badge-primary"><%= results[i].genre %></span></td>
-            <td><%= results[i].pageCount %></td>
-            <td><%= results[i].publisher %></td>
-          </tr>
-        <% } %>
-        </tbody>
-        <!--Table body-->
-      </table>
-      <!--Table-->
-    </div>
-
-  </div>
+    </form>
+    <!-- Form -->
 
 </div>
-<!-- Table with panel -->
-<br>
-<% include partials/footer %>
+
+</div>
+<!-- Material form subscription -->
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

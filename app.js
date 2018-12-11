@@ -257,21 +257,20 @@ app.get("/books/andy", function(req, res){
     res.render("andy");
 });
 
-//Search for books
+//Search for titles
 app.post("/search/title", function(req, res){
-    Books.find({"title": req.body.query}, function(err, results) {
+    Books.find({ "title": { "$regex": req.body.query, "$options": "i" } }, function(err, results) {
         if (err) {
             console.log("Unable to find any titles that match this search: " + req.body.query);
         }
         else {
-
             var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + results.fileName;
-            res.render("search", {
+            res.render("results", {
                  results: results
             })
         }
     });
-})
+});
 
 //Basic Routes
 app.get("/", function(req, res){
