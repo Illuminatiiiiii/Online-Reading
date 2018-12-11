@@ -203,17 +203,6 @@ app.get("/books/read/:id", function(req, res) {
         }
         else {
 
-            // AWS.config.update({
-            //     accessKeyId: "AKIAJCFG24PDUSK7WJHA",
-            //     secretAccessKey: "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",
-            //     region: "us-east-2"
-            // })
-
-            var fileURL = s3.getSignedUrl("getObject", {
-                Bucket: "onlinereading",
-                Key: book.isbn + ".epub"
-            });
-
             var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + book.fileName;
             res.render("reader", {
                 epub: url
@@ -222,6 +211,22 @@ app.get("/books/read/:id", function(req, res) {
     });
 });
 
+//View more info about a book
+app.get("/books/view/:id", function(req, res){
+    Books.findById(req.params.id, function(err, book) {
+        if (err) {
+            console.log("Unable to find book with given id: " + req.params.id);
+        }
+        else {
+
+            var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + book.fileName;
+            res.render("book", {
+                book: book,
+                epub: url
+            });
+        }
+    });
+});
 
 //Basic Routes
 app.get("/", function(req, res){
