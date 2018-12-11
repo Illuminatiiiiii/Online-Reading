@@ -3,3 +3,22 @@ The online reading Engine layout
 
 
 Search for data on books(GIVEN ISBN): node-isbn npm package 
+
+
+
+
+
+
+
+-----------------------------------------------------------------
+TODO
+-----------------------------------------------------------------
+
+1. Preview for epubs when uploaded
+2. Accounts & Login System
+3. Automatic Cover Gathering
+4. View page for more details on a book
+5. Book deleting
+6. Book Lists 
+7. Keep track of books you WANT to read and books you HAVE read
+8. Finish 
