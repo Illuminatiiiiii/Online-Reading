@@ -255,7 +255,23 @@ app.get("/books/andy", function(req, res){
     res.render("andy");
 });
 
-//Search for titles 
+//Search for titles[simple] 
+app.post("/search/title/menu", function(req, res){
+            Books.find({ 
+                "title": { "$regex": req.body.query, "$options": "i" }}, function(err, results) {
+                if (err) {
+                    console.log("Unable to find any titles that match this search: " + req.body.query);
+                }
+                else {
+                    var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + results.fileName;
+                    res.render("results", {
+                         results: results
+                    })
+                }
+            });
+});
+
+//Search for titles[advanced] 
 app.post("/search/title", function(req, res){
     if(req.body.author == ""){
         if(req.body.genre_choice == "on"){
