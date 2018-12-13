@@ -48,6 +48,9 @@
             <th>
               Read
             </th>
+            <th>
+              Info
+            </th>
             <th class="th-lg">
               <a>Cover
                 <i class="fa fa-picture-o ml-1"></i>
@@ -93,6 +96,9 @@
           <tr>
             <th scope="row">
                 <a class="btn-floating btn-sm blue-gradient" href="/books/read/<%= allbooks[i].id %>"><i class="fa fa-book"></i></a>
+            </th>
+            <th scope="row">
+                <a class="btn-floating btn-sm purple-gradient" href="/books/view/<%= allbooks[i].id %>"><i class="fa fa-question"></i></a>
             </th>
             <td><img src="https://onlinereading.sfo2.digitaloceanspaces.com/<%= allbooks[i].imageName %>" style="width: 50px;height: 62px;" /></td>
             <td><%= allbooks[i].title %></td>
