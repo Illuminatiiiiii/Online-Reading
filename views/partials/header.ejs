@@ -14,6 +14,16 @@
     <link rel="canonical" href="https://mdbootstrap.com/plugins/jquery/file-upload/" />
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
     <title>Online Reading 2.0</title>
+    <style>
+    input[type="checkbox"] ~ input {
+    display: none;
+    }
+    input[type="checkbox"]:checked ~ input {
+        display: inline-block;
+    }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
   </head>
 
   <body class="fixed-sn deep-purple-skin">  
@@ -159,32 +169,148 @@
 </div>
 <!--Modal: Login with Avatar Form-->
 
-<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+<!--Modal: Login / Register Form-->
+<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
-    <div class="modal-content text-center">
-      <!--Header-->
-      <div class="modal-header d-flex justify-content-center">
-        <p class="heading">Search!</p>
-      </div>
+    <div class="modal-content">
 
-      <!--Body-->
-      <div class="modal-body">
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
 
-        <i class="fa fa-times fa-4x animated rotateIn"></i>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-book mr-1"></i>
+              Find Title</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-barcode mr-1"></i>
+              ISBN</a>
+          </li>
+        </ul>
 
-      </div>
+        <!-- Tab panels -->
+        <div class="tab-content">
+          <!--Panel 7-->
+          <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
 
-      <!--Footer-->
-      <div class="modal-footer flex-center">
-        <a href="" class="btn  btn-outline-danger">Yes</a>
-        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+
+          <form class="md-form mb-5" action="/search/title" method="POST">
+            <!--Body-->
+            <div class="modal-body mb-1">
+               
+                <p>Search for a book title and enter any extra details you might have:</p>
+                <div class="md-form mb-5">
+                    <i class="fa fa-search prefix grey-text"></i>
+                    <input type="text" id="orangeForm-name" class="form-control validate" name="query">
+                    <label data-error="wrong" data-success="right" for="orangeForm-name">Search for any book...</label>
+                    
+                    </div>
+                    <div class="md-form mb-5">
+                    <i class="fa fa-user prefix grey-text"></i>
+                    <input type="text" id="author" class="form-control validate" name="author">
+                    <label data-error="wrong" data-success="right" for="author">Add an author if you want</label>
+                    
+                    </div>
+
+                    <p>Search Within Genre?</p>
+                    <div class="md-form mb-5">
+                    <br>
+                    <div class="switch">
+                    <label>
+                      Off
+                      <input type="checkbox" id="trigger" name="genre_choice">
+                      <span class="lever"></span> On
+                    </label>
+                    </div>
+
+                    <div id="hidden_fields"> 
+                    <div class="md-form mb-5">
+                    
+                    
+                    
+                    <select class="mdb-select md-form" searchable="Search here.." name="genre">
+                      <option value="" disabled selected>Choose a Genre</option>
+                      <option value="Art">Art</option>
+                      <option value="Biography">Biography</option>
+                      <option value="Business">Business</option>
+                      <option value="Childrens">Childrens</option>
+                      <option value="Religion">Religion</option>
+                      <option value="Classics">Classics</option>
+                      <option value="Comics">Comics</option>
+                      <option value="Crime">Crime</option>
+                      <option value="Fantasy">Fantasy</option>
+                      <option value="Historical Fiction">Historical Fiction</option>
+                      <option value="History">History</option>
+                      <option value="Horror">Horror</option>
+                      <option value="Mystery">Mystery</option>
+                      <option value="Philosophy">Philosophy</option>
+                      <option value="Poetry">Poetry</option>
+                      <option value="Science">Science</option>
+                      <option value="Romance">Romance</option>
+                      <option value="Science Fiction">Science Fiction</option>
+                    </select>
+                    </div>
+                    </div>
+              
+
+              
+            </div>
+              <div class="text-center mt-2">
+                <button class="btn btn-info">Search <i class="fa fa-search ml-1"></i></button>
+              </div>
+            </div>
+            </form>
+            <!--Footer-->
+            <div class="modal-footer">
+              <div class="options text-center text-md-right mt-1">
+                <p>Want a full list? <a href="/books" class="blue-text">Click me</a></p>
+              </div>
+              <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+          <!--/.Panel 7-->
+
+          <!--Panel 8-->
+          <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+            <!--Body-->
+            <form action="/search/isbn" method="POST">
+            <div class="modal-body">
+            <p>If this book isn't found on our system, we will show you data that we can find.</p>
+              <div class="md-form form-sm mb-5">
+                <i class="fa fa-user-plus prefix"></i>
+                <input type="text" id="modalLRInput12" class="form-control form-control-sm validate" name="isbn">
+                <label data-error="wrong" data-success="right" for="modalLRInput12">ISBN-10 or ISBN-13</label>
+              </div>
+
+              <div class="text-center form-sm mt-2">
+                <button class="btn btn-info">Search <i class="fa fa-search ml-1"></i></button>
+              </div>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              <div class="options text-right">
+                <p class="pt-1">Full list of books <a href="/books" class="blue-text">Click Me!</a></p>
+              </div>
+              <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+            
+          </div>
+          <!--/.Panel 8-->
+        </div>
+
       </div>
     </div>
     <!--/.Content-->
   </div>
 </div>
+<!--Modal: Login / Register Form-->
+
 
   <main>
     <div class="container-fluid text-center">

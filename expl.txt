@@ -21,4 +21,4 @@ TODO
 5. Book deleting
 6. Book Lists 
 7. Keep track of books you WANT to read and books you HAVE read
-8. Finish 
+8. Owner Verified

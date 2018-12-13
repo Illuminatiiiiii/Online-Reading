@@ -1,0 +1,199 @@
+<% include partials/header %>
+
+<!-- Jumbotron -->
+<div class="jumbotron text-center mdb-color elegant-color white-text mx-2 mb-5">
+  <!-- Title -->
+  <h2 class="card-title h2" style="font-family: 'Arvo', serif;"><%= book.title %></h2>
+
+  <img src="https://onlinereading.sfo2.digitaloceanspaces.com/<%= book.imageName %>" class="rounded-circle z-depth-1">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+        <br>
+
+        <% if(book.rating >= 0.1 && book.rating <= 1.9){ %>
+  <ul class="rating">
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+</ul>
+<% }else if(book.rating == 0){ %>
+  <ul class="rating">
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+</ul>
+<% }else if(book.rating <= 2.9 && book.rating >= 2){ %>
+  <ul class="rating">
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+</ul>
+<%  }else if(book.rating <= 3.9 && book.rating >= 3){ %>
+  <ul class="rating">
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+</ul>
+<%   }else if(book.rating <= 4.9 && book.rating >= 4){ %>
+  <ul class="rating">
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star-o"></i>
+  </li>
+</ul>
+<% }else if(book.rating == 5){ %>
+  <ul class="rating">
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+  <li>
+    <i class="fa fa-star"></i>
+  </li>
+</ul>
+<% }else if(book.rating == null){ %>
+<ul class="rating">
+<li>
+ <i class="fa fa-star-o"></i>
+</li>
+<li>
+ <i class="fa fa-star-o"></i>
+</li>
+<li>
+ <i class="fa fa-star-o"></i>
+</li>
+<li>
+ <i class="fa fa-star-o"></i>
+</li>
+<li>
+ <i class="fa fa-star-o"></i>
+</li>
+</ul> 
+<% } %>
+  <!-- Subtitle -->
+  <p class="my-4 h6">by <%= book.author %>, <%= book.publisher %></p>
+
+  <!-- Grid row -->
+  <div class="row d-flex justify-content-center">
+
+    <!-- Grid column -->
+    <div class="col-xl-7 pb-2">
+
+      <p class="card-text" style="font-family: 'Exo', sans-serif;"><%= book.description %></p>
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+  <hr class="my-4 rgba-white-light">
+
+  <span class="badge badge-danger"><i class="fa fa-file-text" aria-hidden="true"></i> <%= book.pageCount %> Pages</span>
+  <span class="badge badge-primary"><i class="fa fa-barcode" aria-hidden="true"></i> ISBN: <%= book.isbn %></span>
+  <span class="badge orange"><i class="fa fa-paperclip" aria-hidden="true"></i> Genre: <%= book.genre %></span>
+  <% if(book.fiction == "Fiction"){ %>
+            <span class="badge badge-pill badge-dark"><%= book.fiction %></span>
+            <% }else{ %>
+            <span class="badge badge-pill badge-light"><%= book.fiction %></span>
+            <% } %>
+
+  <hr class="my-4 rgba-white-light">
+
+  <div class="pt-2">
+    <a type="button" class="btn btn-outline-white" href="/books/read/<%= book.id %>">Read Book <i class="fa fa-book ml-1"></i></a>
+    <a type="button" class="btn btn-outline-white" href="emptyfornow.com">Download <i class="fa fa-download ml-1"></i></a>
+  </div>
+
+</div>
+<!-- Jumbotron -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% include partials/footer %>

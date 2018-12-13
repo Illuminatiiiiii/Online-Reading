@@ -75,6 +75,7 @@ app.get("/books", function(req, res){
     });
 });
 
+//Small view of books
 app.get("/books/onepage", function(req, res){
     Books.find({}, function(err, allbooks) {
         if (err) {
@@ -87,6 +88,21 @@ app.get("/books/onepage", function(req, res){
         }
     });
 });
+
+// //Authors page/view
+// app.get("/authors", function(req, res){
+//     Books.find({}, function(err, allbooks) {
+//         if (err) {
+//             console.log("Problem getting books");
+//         }
+//         else {
+//             res.render("onepage", {
+//                 allbooks: allbooks
+//             });
+//         }
+//     });
+// });
+
 
 //Take ISBN and post it
 app.get("/books/add", function(req, res) {
@@ -223,25 +239,7 @@ app.get("/books/view/:id", function(req, res){
         }
         else {
 
-            var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + book.fileName;
             res.render("book", {
-                book: book,
-                epub: url
-            });
-        }
-    });
-});
-
-app.get("/books/view/:id", function(req, res) {
-    Books.findById(req.params.id, function(err, book) {
-        if (err) {
-            console.log("Unable to find book with given id: " + req.params.id);
-        }
-        else {
-
-            var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + book.fileName;
-            res.render("reader", {
-                epub: url,
                 book: book
             });
         }
@@ -257,20 +255,79 @@ app.get("/books/andy", function(req, res){
     res.render("andy");
 });
 
-//Search for titles
+//Search for titles 
 app.post("/search/title", function(req, res){
-    Books.find({ "title": { "$regex": req.body.query, "$options": "i" } }, function(err, results) {
+    if(req.body.author == ""){
+        if(req.body.genre_choice == "on"){
+            Books.find({ 
+                "title": { "$regex": req.body.query, "$options": "i" }, "genre": req.body.genre}, function(err, results) {
+                if (err) {
+                    console.log("Unable to find any titles that match this search: " + req.body.query);
+                }
+                else {
+                    var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + results.fileName;
+                    res.render("results", {
+                         results: results
+                    })
+                }
+            });
+        }else{
+            Books.find({ "title": { "$regex": req.body.query, "$options": "i" }}, function(err, results) {
+                if (err) {
+                    console.log("Unable to find any titles that match this search: " + req.body.query);
+                }
+                else {
+                    var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + results.fileName;
+                    res.render("results", {
+                         results: results
+                    })
+                }
+            });
+        }
+    }else{
+        if(req.body.genre_choice == "on"){
+            Books.find({ 
+                "title": { "$regex": req.body.query, "$options": "i" }, "genre": req.body.genre, "author": req.body.author}, function(err, results) {
+                if (err) {
+                    console.log("Unable to find any titles that match this search: " + req.body.query);
+                }
+                else {
+                    var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + results.fileName;
+                    res.render("results", {
+                         results: results
+                    })
+                }
+            });
+        }else{
+            Books.find({ "title": { "$regex": req.body.query, "$options": "i" }, "author": req.body.author}, function(err, results) {
+                if (err) {
+                    console.log("Unable to find any titles that match this search: " + req.body.query);
+                }
+                else {
+                    var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + results.fileName;
+                    res.render("results", {
+                         results: results
+                    })
+                }
+            });
+        }
+    }
+});
+
+//Find data on books
+app.post("/search/isbn", function(req, res){
+    Books.findOne({"isbn": req.body.isbn}, function(err, book) {
         if (err) {
-            console.log("Unable to find any titles that match this search: " + req.body.query);
+            console.log("Problem locating this isbn:" + req.body.isbn);
         }
         else {
-            var url = "https://onlinereading.sfo2.digitaloceanspaces.com/" + results.fileName;
-            res.render("results", {
-                 results: results
-            })
+            res.render("book", {
+                book: book
+            });
         }
     });
 });
+
 
 //Basic Routes
 app.get("/", function(req, res){
