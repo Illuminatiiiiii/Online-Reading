@@ -248,7 +248,7 @@ app.get("/books/view/:id", function(req, res){
 
 //Kody
 app.get("/books/kody", function(req, res){
-    res.render("kody");
+    res.render("kody2");
 });
 
 app.get("/books/andy", function(req, res){
