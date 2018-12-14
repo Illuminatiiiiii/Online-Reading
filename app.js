@@ -29,7 +29,7 @@ var s3 = new AWS.S3({
 var myBucket = "onlinereading";
 
 //Connect to database
-mongoose.connect("mongodb://kody:3.14159265359@ds117830.mlab.com:17830/onlinereading", {
+mongoose.connect(process.env.mongo_url, {
     useNewUrlParser: true
 });
 
