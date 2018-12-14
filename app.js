@@ -47,7 +47,8 @@ var bookSchema = new mongoose.Schema({
     imageLocation: String,
     fileLocation: String,
     fiction: String,
-    genre: Array
+    genre: Array,
+    verified: Boolean
  });
  
 var Books = mongoose.model("Books", bookSchema);
@@ -200,7 +201,8 @@ app.post("/books/add/complete", function(req, res){
                 imageLocation: "https://onlinereading.sfo2.digitaloceanspaces.com/" + imageName,
                 fileLocation: "https://onlinereading.sfo2.digitaloceanspaces.com/" + fileName,
                 fiction: bookX.fiction,
-                genre: bookX.genre
+                genre: bookX.genre,
+                verified: false
             }, function(err, book) {
                 if (err) {
                     console.log("Upload Failed!!!.");

@@ -52,6 +52,7 @@
             <% }else{ %>
             <span class="badge badge-pill badge-light"><%= allbooks[i].fiction %></span>
             <% } %> <span class="badge badge-pill badge-dark"><%= allbooks[i].genre %></span>
+            <% if(allbooks[i].verified == true){ %> <a data-toggle="tooltip" title="Verified by the Owner of the Site as a GREAT book."><span class="badge badge-pill orange"><i class="fa fa-star" aria-hidden="true"></i></span></a><% } %>
       <hr>
         <!--Title-->
         <h4 class="card-title" style="max-lines: 2"><%= allbooks[i].title %></h4>
