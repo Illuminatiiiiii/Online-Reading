@@ -3,9 +3,8 @@ var mongoose = require("mongoose");
 var isbnSearch = require("node-isbn");
 const bodyParser = require('body-parser');
 var fileUpload = require('express-fileupload');
-var AWS = require('aws-sdk');
-var fs =  require('fs');
-const multer = require("multer");
+const AWS = require('aws-sdk');
+const firebase = require("firebase");
 
 const app = express();
 
@@ -27,6 +26,23 @@ var s3 = new AWS.S3({
 });
 
 var myBucket = "onlinereading";
+
+//////////////////////////////////
+//Firebase
+
+// Initialize Firebase
+// TODO: Replace with your project's customized code snippet
+var config = {
+    apiKey: "AIzaSyD9qos75qOQF15tqgoEuViNKan443CQg78",
+    authDomain: "online-reading-68802.firebaseapp.com",
+    databaseURL: "https://online-reading-68802.firebaseio.com",
+    projectId: "online-reading-68802",
+    storageBucket: "online-reading-68802.appspot.com",
+    messagingSenderId: "350787784737"
+  };
+  firebase.initializeApp(config);
+
+///////////////////////////////
 
 //Connect to database
 mongoose.connect(process.env.mongo_url, {
@@ -250,7 +266,7 @@ app.get("/books/view/:id", function(req, res){
 
 //Kody
 app.get("/books/kody", function(req, res){
-    res.render("kody2");
+    res.render("kody");
 });
 
 app.get("/books/andy", function(req, res){
@@ -345,6 +361,41 @@ app.post("/search/isbn", function(req, res){
         }
     });
 });
+
+//Auth////////////////////
+app.post("/account/login", function(req, res){
+    const email = req.body.email;
+    const password = req.body.password;
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        console.log("User logged in: " + email);
+        res.redirect("/");
+      });
+});
+
+app.post("/account/register", function(req, res){
+    const email = req.body.email;
+    const password = req.body.password;
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        console.log("Account created: " + email);
+        res.redirect("/");
+      });
+});
+
+
+
+
+
+
+
+////////
 
 
 //Basic Routes
