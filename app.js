@@ -273,6 +273,10 @@ app.get("/books/andy", function(req, res){
     res.render("andy");
 });
 
+app.get("/books/book1", function(req, res){
+    res.render("book1");
+});
+
 //Search for titles[simple] 
 app.post("/search/title/menu", function(req, res){
             Books.find({ 
