@@ -277,6 +277,10 @@ app.get("/books/book1", function(req, res){
     res.render("book1");
 });
 
+app.get("/books/kody3", function(req, res){
+    res.render("kody3");
+});
+
 //Search for titles[simple] 
 app.post("/search/title/menu", function(req, res){
             Books.find({ 
