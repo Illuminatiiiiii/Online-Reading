@@ -269,7 +269,7 @@ app.get("/books/kody", function(req, res){
     res.render("kody");
 });
 
-app.get("/books/kody", function(req, res){
+app.get("/books/kody2", function(req, res){
     res.render("kody2");
 });
 
