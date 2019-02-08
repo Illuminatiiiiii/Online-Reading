@@ -266,6 +266,10 @@ app.get("/books/view/:id", function(req, res){
 
 //Kody
 app.get("/books/kody", function(req, res){
+    res.render("kody");
+});
+
+app.get("/books/kody", function(req, res){
     res.render("kody2");
 });
 
